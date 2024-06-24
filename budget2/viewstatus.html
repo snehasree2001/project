@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SRI KRISHNA</title>
+    <style>
+        .body {
+            background-image: url("assest/pg.jpeg");
+            height: 100%; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .centerbox {
+            background: #e9e7e0de;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            height: 250px;
+            max-width: 90%;
+            position: relative;
+            animation-name: fallIn;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-in-out;
+        }
+        .centerbox button {
+            width: 80%;
+            padding: 10px;
+        }
+        .button button:first-child {
+            margin-bottom: 40px;
+        }
+
+        @keyframes fallIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="Header h-20 w-full bg-blue-600 flex justify-center">
+        <div class="logo ">
+            <img class="h-10 mt-5 " src="assest/logo.png">
+        </div>
+        <div class="text-black text-center place-items-stretch pt-5 ml-5 mr-8">
+            <h1 class="font-bold text-2xl text-white ">SRI KRISHNA INSTITUTIONS</h1>
+        </div>
+    </div>
+    <div class="body h-screen flex justify-center place-content-center bg-gray-200 ">
+        <div class="centerbox mt-24">
+            <div class="button flex justify-center mt-8">
+                <button onclick="window.location.href='chooseclg1.html'" class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-11 rounded">INDIVIDUAL BUDGET DETAILS</button>
+            </div>
+            <div class="button flex justify-center">
+                <button onclick="window.location.href=''"class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">CONSOLIDATED REPORT</button></a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

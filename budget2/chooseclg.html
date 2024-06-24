@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SRI KRISHNA</title>
+    <style>
+        /* Your existing CSS styles */
+        .body {
+            background-image: url("assest/pg.jpeg");
+            height: 100%; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .centerbox {
+            background: #e9e7e0de;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            height: 350px;
+            max-width: 90%;
+            position: relative;
+            animation-name: fallIn;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-in-out;
+        }
+        .centerbox button {
+            width: 80%;
+            padding: 10px;
+        }
+        .button button:first-child {
+            margin-bottom: 40px;
+        }
+
+        @keyframes fallIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Your existing HTML structure -->
+    <div class="Header h-20 w-full bg-blue-600 flex justify-center">
+        <!-- Header content -->
+    </div>
+    <div class="body h-screen flex justify-center place-content-center bg-gray-200 ">
+        <div class="centerbox mt-24">
+            <!-- SKCET Button -->
+            <div class="button flex justify-center mt-10">
+                <img class="h-10 mr-5" src="assest/skcet.png">
+                <button onclick="redirectToSelection('SKCET')" class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">SKCET</button>
+            </div>
+            <!-- SKCT Button -->
+            <div class="button flex justify-center">
+                <img class="h-10 mr-5" src="assest/skct.png">
+                <button onclick="redirectToSelection('SKCT')" class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">SKCT</button>
+            </div>
+            <!-- SKASC Button -->
+            <div class="button flex justify-center">
+                <img class="h-10 mr-5" src="assest/skasc.png">
+                <button onclick="redirectToSelection('SKASC')" class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">SKASC</button>
+            </div>
+            <!-- SKACAS Button -->
+            <div class="button flex justify-center">
+                <img class="h-10 mr-5" src="assest/skacas.png">
+                <button onclick="redirectToSelection('SKACAS')" class="mb-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-12 rounded">SKACAS</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function redirectToSelection(college) {
+            // Redirect to selection.html with the selected college as a query parameter
+            window.location.href = 'register.html?college=' + encodeURIComponent(college);
+        }
+    </script>
+</body>
+</html>

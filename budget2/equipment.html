@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equitment Form</title>
+<style>
+    /* Basic CSS for styling the form */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(74, 104, 204);
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: #e9e7e0de;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced box shadow */
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+        display: block;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    input[type="file"],
+    textarea,
+    select {
+        width: calc(100% - 10px);
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .radio-group input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    fieldset legend {
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffd700; /* Yellow background color */
+    color: #333; /* Darker text color */
+    padding: 5px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+    fieldset label {
+        margin-right: 10px;
+    }
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+.radio-group label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px; /* Adjust spacing between radio button and label */
+}
+    .form-group input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ccc; /* Border color same as other fields */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px; /* Font size same as other fields */
+    color: #2874B1; /* Text color same as other fields */
+}
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    /* Hide the spinner arrows */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .add-button {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .remove-button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1><center>PURCHASE OF EQUIPMENT FORM</center></h1>
+    <form action="equipment.php" method="post">
+        <div class="form-group">
+          
+            <label for="select_clg">Selected College:</label>
+            <input type="text" id="selectedCollege" name="select_clg" readonly>
+       
+    </div>
+
+        <div class="form-group">
+            <label for="faculty_name"> Name Of The Faculty</label>
+            <input type="text" id="faculty_name" name="faculty_name" required>
+        </div>
+          
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department"  id="department" name="department" required>
+                <option value="select" hidden>Select Department</option>
+                <option >ECE</option>
+                <option >S & H</option>
+                <option >EEE</option>
+                <option >Civil</option>
+                <option >Mech</option>
+                <option >CSE</option>
+                <option >IT</option>
+                <option >MBA</option>
+                <option >ADS</option>
+                <option >IOT</option>
+                <option >CYS</option>
+                <option >AML</option>                
+                <option >common</option>
+            </select>
+        </div>
+       
+        <div class="form-group">
+            <label for="date_purchase">Date Of Purchase</label>
+            <input type="date" id="date_purchase" name="date_purchase" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="category" style="margin-right: 1in;"> Category </label><br>
+            <div class="radio-group">
+                <input type="radio" id="recurring" name="category" value="recurring" required>
+                <label for="recurring">Recurring</label>
+                <input type="radio" id="non_recurring" name="category" value="non_recurring" required>
+                <label for="non_recurring">Non Recurring</label>
+            </div>
+        </div>
+        <div class="table-container">
+            <fieldset style="font-size: smaller;">
+                <legend>Equipment Purchase</legend>
+                <table class="styled-table" id="equipment_table">
+                    <thead>
+                        <tr>
+                            <th>Equipment List</th>
+                            <th>Specifications</th>
+                            <th>Unit Price</th>
+                            <th>Total Quantity</th>
+                            <th>Total Cost ₹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="equipment_list" required></td>
+                            <td><input type="text" name="specification" required></td>
+                            <td><input type="number" name="unit_price" oninput="updateRowTotal(this.parentNode.parentNode)" required></td>
+                            <td><input type="number" name="quantity" oninput="updateRowTotal(this.parentNode.parentNode)" required></td>
+                            <td><input type="number" name="cost" readonly></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        <div class="add-button-container">
+            <button class="add-button" onclick="addRow()">Add</button>
+        </div>
+        
+        <div class="total-cost-container">
+            <label>Total Cost of All Items ₹</label>
+            <input type="number" id="total_cost" name="total_cost" readonly>
+        </div>
+        <div class="form-group">
+            <label for="attachment">Proof</label>
+            <input type="file" id="attachment"  accept="application/pdf" name="proof">
+        </div>
+        <div class="form-group">
+            <label for="document">Supporting Documents(Service Report/ Guidelines)</label>
+            <input type="file" id="document"  accept="application/pdf" name="document" >
+        </div>
+        
+        <div class="form-group">
+            <label for="principal_comments">Comments</label>
+            <textarea id="principal_comments" name="principal_comment" style="width: 100%;" required></textarea>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="status" value="Pending">
+
+        <center><input type="submit" value="Submit" name="submit"></center>
+    </form>
+</div>
+
+<script>
+     function addRow() {
+        var table = document.getElementById("equipment_table").getElementsByTagName('tbody')[0];
+        var row = table.insertRow(-1); // Insert row at the end
+
+        // Insert cells for each column
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+
+        // Assign input fields to cells
+        cell1.innerHTML = '<input type="text" name="equipment_list" required>';
+        cell2.innerHTML = '<input type="text" name="specification" required>';
+        cell3.innerHTML = '<input type="number" name="unit_price" oninput="updateRowTotal(this.parentNode.parentNode)" required>';
+        cell4.innerHTML = '<input type="number" name="quantity" oninput="updateRowTotal(this.parentNode.parentNode)" required>';
+        cell5.innerHTML = '<input type="number" name="cost" readonly>';
+        cell6.innerHTML = '<button class="remove-button" onclick="removeRow(this)">Remove</button>';
+    }
+
+    function removeRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+        updateTotalCost();
+    }
+
+    function updateRowTotal(row) {
+        var price = parseFloat(row.querySelector('input[name="unit_price"]').value) || 0;
+        var quantity = parseInt(row.querySelector('input[name="quantity"]').value) || 0;
+        var totalItemCost = price * quantity;
+        row.querySelector('input[name="cost"]').value = totalItemCost.toFixed(2);
+        updateTotalCost();
+    }
+
+    function updateTotalCost() {
+        var table = document.getElementById("equipment_table").getElementsByTagName('tbody')[0];
+        var rows = table.getElementsByTagName('tr');
+        var totalCost = 0;
+        for (var i = 0; i < rows.length; i++) {
+            var cost = parseFloat(rows[i].querySelector('input[name="cost"]').value) || 0;
+            totalCost += cost;
+        }
+        document.getElementById("total_cost").value = totalCost.toFixed(2);
+    }
+</script>
+<script>
+    // Function to get URL parameters
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Retrieve the college name parameter value from the URL
+    var collegeName = getParameterByName('college');
+
+    // Set the value of the input box to the selected college name
+    if (collegeName) {
+        document.getElementById('selectedCollege').value = collegeName.toUpperCase();
+    }
+</script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Form</title>
+<style>
+    /* Basic CSS for styling the form */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(74, 104, 204);
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: #e9e7e0de;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+        display: block;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    textarea,
+    select {
+        width: calc(100% - 10px);
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    fieldset {
+        margin: 0;
+        padding: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    fieldset legend {
+        text-align: center;
+        font-weight: bold;
+        background-color: #ffd700;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    fieldset label {
+        margin-right: 10px;
+    }
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Checkbox styling */
+    .checkbox-container {
+        display: flex;
+        flex-direction: row;
+        vertical-align: top;
+        margin-right: 20px;
+    }
+
+    .checkbox-container label {
+        margin-left: 5px;
+    }
+
+    /* Hide default checkboxes */
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    /* Custom checkbox design */
+    .checkbox-custom {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #ffffff;
+        border-radius: 3px;
+        position: relative;
+    }
+
+    /* Checked state */
+    .checkbox-custom:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        background-color: #4e49ec;
+        border-radius: 2px;
+        display: none;
+    }
+
+    input[type="checkbox"]:checked + .checkbox-custom:before {
+        display: block;
+    }
+    .form-group input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ccc; /* Border color same as other fields */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px; /* Font size same as other fields */
+    color: #2874B1; /* Text color same as other fields */
+}
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.button:hover {
+  background-color: #0056b3;
+}
+    
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1><center>BUDGET FORM</center></h1>
+    <form action="home.php" method="post">
+        <div class="form-group">
+          
+                <label for="select_clg">Selected College:</label>
+                <input type="text" id="selectedCollege" name="select_clg" readonly>
+           
+        </div>
+        <div class="form-group">
+            <label for="date_from">Date From</label>
+            <input type="date" id="date_from" name="date_from" required>
+            <label for="date_to">To</label>
+            <input type="date" id="date_to" name="date_to" required>
+        </div>
+        
+        <script>
+            document.getElementById('date_from').addEventListener('change', function() {
+                var fromDate = new Date(this.value);
+                var toDateInput = document.getElementById('date_to');
+                var toDate = new Date(toDateInput.value);
+        
+                // Lock previous months in date_to input
+                toDateInput.min = fromDate.toISOString().split('T')[0];
+        
+                // Reset date_to input if it's earlier than the new min date
+                if (toDate < fromDate) {
+                    toDateInput.value = fromDate.toISOString().split('T')[0];
+                }
+            });
+        </script>
+        
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department"  id="department" name="department" required>
+                <option  hidden>Select Department</option>
+                <option >ECE</option>
+                <option >S & H</option>
+                <option >EEE</option>
+                <option >Civil</option>
+                <option >Mech</option>
+                <option >CSE</option>
+                <option >IT</option>
+                <option >MBA</option>
+                <option >ADS</option>
+                <option >IOT</option>
+                <option >CYS</option>
+                <option >AML</option>                
+                <option >common</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="time_from">Time Schedule From</label>
+            <input type="time" id="time_from" name="time_from" required>
+            <label for="time_to">To</label>
+            <input type="time" id="time_to" name="time_to" required>
+            <label for="duration">Duration (hours)</label>
+            <input type="text" id="duration" name="duration" readonly>
+        </div>
+        
+        <script>
+            document.getElementById('time_from').addEventListener('input', calculateDuration);
+            document.getElementById('time_to').addEventListener('input', calculateDuration);
+        
+            function calculateDuration() {
+                var startTime = document.getElementById('time_from').value;
+                var endTime = document.getElementById('time_to').value;
+        
+                if (startTime && endTime) {
+                    var start = startTime.split(':');
+                    var end = endTime.split(':');
+        
+                    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+                    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+        
+                    var diff = endDate.getTime() - startDate.getTime();
+                    var hours = Math.floor(diff / 1000 / 60 / 60);
+                    var minutes = Math.floor(diff / 1000 / 60) % 60;
+        
+                    // Format the duration
+                    var duration = hours + ' hours ';
+                    if (minutes > 0) {
+                        duration += minutes + ' minutes';
+                    }
+        
+                    document.getElementById('duration').value = duration;
+                }
+            }
+        </script>
+        
+        <div class="form-group">
+            <label for="activity_type">Type of Activity</label>
+            <select id="activity_type"   name="activity_type" required>
+                <option hidden>Select Activity Type</option>
+                <option >Guest Lecture</option>
+                <option >Seminar</option>
+                <option >Workshop</option>
+                <option >Conference</option>
+                <option >VAC</option>
+                <option >Industrial Visit</option>
+                <option >Online Talk</option>
+                <option >Alumni Talk</option>
+                <option >Sports</option>
+                <option >Culturals</option>
+                <option >Orientation Talk</option>
+                <option >Soft Skills</option>
+                <option >Competitve Exam</option>
+                <option >Career Counselling</option>
+                <option >Professional Development</option>
+                <option >Administrative Training</option>
+                <option >Extension and Outreach Event</option> 
+                </select>          
+        </div>
+        <div class="form-group">
+            <label for="activity_affiliation">Activity Affiliation</label>
+            <select id="activity_affiliation" name="activity_affiliation" required>
+                <option  hidden>Select Affiliation</option>
+                <option>Club</option>
+                <option>Professional Society</option>
+                <option>IIC</option>
+                <option>Research and Development</option>
+                <option>IPR</option>
+                <option>IIPC</option>
+                <option>IQAC</option>
+                <option>EDC</option>
+                <option>Alumni Cell</option>
+                <option>Placement and Training Cell</option>
+                <option>Centre for International Relations</option>
+                <option>Higher Education Cell</option>
+                <option>Gender Equity and Women Development Cell</option>
+                <option>Exam Cell</option>
+                <option>Others</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="event_title">Event Title</label>
+            <input type="text" id="event_title" name="event_title" required>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                <legend>Resource Person Details</legend>
+                <label for="resource_name">Name</label>
+                <input type="text" id="resource_name" name="resource_name" required>
+                <label for="designation">Designation</label>
+                <input type="text" id="designation" name="designation" required>
+                <label for="company_details">Company Details</label>
+                <input type="text" id="company_details" name="company_details" required>
+                <label for="con_number">Contact Number</label>
+                <input type="number" id="con_number" name="con_number" required>
+            </fieldset>
+        </div>
+            
+                <div class="form-group">
+                
+                    <fieldset>
+                   
+                        <legend style="margin-bottom: 10px;">Target Audience</legend>
+                        <div style="display: flex;flex-direction:row">
+                        <label style="margin-bottom: 20px;">Academic Year</label>
+                        <div class="checkbox-container">
+                         
+                            <input type="checkbox" id="first_year" name="academic_year[]" value="First Year">
+                            <label for="first_year" class="checkbox-custom"></label>
+                            <label for="first_year">First Year</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="second_year" name="academic_year[]" value="Second Year">
+                            <label for="second_year" class="checkbox-custom"></label>
+                            <label for="second_year">Second Year</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="third_year" name="academic_year[]" value="Third Year">
+                            <label for="third_year" class="checkbox-custom"></label>
+                            <label for="third_year">Third Year</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="final_year" name="academic_year[]" value="Final Year">
+                            <label for="final_year" class="checkbox-custom"></label>
+                            <label for="final_year">Final Year</label>
+                        </div>
+                    </div>
+                <div class="form-group">
+                 
+                    <label style="margin-bottom: 10px;">Select Department</label>
+                    <div style="display: flex;flex-direction:column;gap:30px">
+                  <div style="display: flex;flex-direction:row">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ECE" name="audience_department[]" value="ECE">
+                            <label for="ECE" class="checkbox-custom"></label>
+                            <label for="ECE">ECE</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="S_H" name="audience_department[]" value="S & H">
+                            <label for="S_H" class="checkbox-custom"></label>
+                            <label for="S_H">S&H</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="EEE" name="audience_department[]" value="EEE">
+                            <label for="EEE" class="checkbox-custom"></label>
+                            <label for="EEE">EEE</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="Civil" name="audience_department[]" value="Civil">
+                            <label for="Civil" class="checkbox-custom"></label>
+                            <label for="Civil">Civil</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="Mech" name="audience_department[]" value="Mech">
+                            <label for="Mech" class="checkbox-custom"></label>
+                            <label for="Mech">Mech</label>
+                        </div></div><div style="display: flex;flex-direction:row">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="CSE" name="audience_department[]" value="CSE">
+                            <label for="CSE" class="checkbox-custom"></label>
+                            <label for="CSE">CSE</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="IT" name="audience_department[]" value="IT">
+                            <label for="IT" class="checkbox-custom"></label>
+                            <label for="IT">IT</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="MBA" name="audience_department[]" value="MBA">
+                            <label for="MBA" class="checkbox-custom"></label>
+                            <label for="MBA">MBA</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="ADS" name="audience_department[]" value="ADS">
+                            <label for="ADS" class="checkbox-custom"></label>
+                            <label for="ADS">ADS</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="IOT" name="audience_department[]" value="IOT">
+                            <label for="IOT" class="checkbox-custom"></label>
+                            <label for="IOT">IOT</label>
+                        </div></div><div style="display: flex;flex-direction:row">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="CYS" name="audience_department[]" value="CYS">
+                            <label for="CYS" class="checkbox-custom"></label>
+                            <label for="CYS">CYS</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="AML" name="audience_department[]" value="AML">
+                            <label for="AML" class="checkbox-custom"></label>
+                            <label for="AML">AML</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="external" name="audience_department[]" value="external">
+                            <label for="external" class="checkbox-custom"></label>
+                            <label for="external">External</label>
+                        </div>
+                    </div>
+                    </div>
+
+                </fieldset>
+             
+                </div>
+            
+        
+        <div class="form-group">
+            <label for="venue">Venue</label>
+            <select id="venue"  id="venue" name="venue" required>
+                <option  hidden>Select Venue</option>
+                <option >Vankatram Hall</option>
+                <option >ES Seminar Hall</option>
+                <option >PG Seminar Hall</option>
+                <option >Main Block Seminar Hall</option>
+                <option >Classroom</option>
+                <option >Others</option>
+                </select>
+         </div>
+        <div class="form-group">
+            <label for="budget-requested">Budget Requested (Remuneration includes TA & DA / Memento)</label>
+            <input type="text" id="budget-requested" name="budget-requested" required>
+        </div>
+        <div class="form-group">
+            <fieldset>
+                <legend>Faculty Coordinator</legend>
+                <label for="faculty_name">Name</label>
+                <input type="text" id="faculty_name" name="faculty_name" required>
+                <label for="faculty_number">Contact Number</label>
+                <input type="number" id="faculty_number" name="faculty_number" required>
+            </fieldset>
+        </div>
+        <a href="data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,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" class="button">Application Form Link</a>
+
+        <div class="form-group">
+            <label for="attachment"><br>Attachment(Attach the above filled file)</label>
+            <input type="file" id="attachment"  accept="application/pdf" name="attachment">
+        </div>
+        <div class="form-group">
+            <label for="principal_comments">Comments</label>
+            <textarea id="principal_comments" name="principal_comment" style="width: 100%;" required></textarea>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="status" value="Pending">
+
+        <center><input type="submit" value="Submit" name="submit"></center>
+    </form>
+</div>
+<script>
+    // Function to get URL parameters
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Retrieve the college name parameter value from the URL
+    var collegeName = getParameterByName('college');
+
+    // Set the value of the input box to the selected college name
+    if (collegeName) {
+        document.getElementById('selectedCollege').value = collegeName.toUpperCase();
+    }
+</script>
+</body>
+</html>

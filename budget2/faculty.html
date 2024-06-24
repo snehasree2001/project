@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Financial Support</title>
+<style>
+    /* Basic CSS for styling the form */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(74, 104, 204);
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        max-width: 700px;
+        margin: auto;
+        background: #e9e7e0de;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced box shadow */
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+        display: block;
+    }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+
+    textarea,
+    select {
+        width: calc(100% - 10px);
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    fieldset {
+        margin: 0;
+        padding: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    fieldset legend {
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffd700; /* Yellow background color */
+    color: #333; /* Darker text color */
+    padding: 5px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+    fieldset label {
+        margin-right: 10px;
+    }
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    .form-group input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px solid #ccc; /* Border color same as other fields */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px; /* Font size same as other fields */
+    color: #2874B1; /* Text color same as other fields */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1><center>FACULTY FINANCIAL SUPPORT</center></h1>
+    <form action="faculty.php" method="post">
+        <div class="form-group">
+          
+            <label for="select_clg">Selected College:</label>
+            <input type="text" id="selectedCollege" name="select_clg" readonly>
+       
+    </div>
+    
+        
+        <div class="form-group">
+            <label for="date_from">Date From</label>
+            <input type="date" id="date_from" name="date_from" required>
+            <label for="date_to">To</label>
+            <input type="date" id="date_to" name="date_to" required>
+        </div>
+        
+        <script>
+            document.getElementById('date_from').addEventListener('change', function() {
+                var fromDate = new Date(this.value);
+                var toDateInput = document.getElementById('date_to');
+                var toDate = new Date(toDateInput.value);
+        
+                // Lock previous months in date_to input
+                toDateInput.min = fromDate.toISOString().split('T')[0];
+        
+                // Reset date_to input if it's earlier than the new min date
+                if (toDate < fromDate) {
+                    toDateInput.value = fromDate.toISOString().split('T')[0];
+                }
+            });
+        </script>
+        
+        
+        <div class="form-group">
+            <label for="faculty_name">Faculty Name</label>
+            <input type="text" id="faculty_name" name="faculty_name" required>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <select id="department"  id="department" name="department" required>
+                <option hidden>Select Department</option>
+                <option >ECE</option>
+                <option >S & H</option>
+                <option >EEE</option>
+                <option >Civil</option>
+                <option >Mech</option>
+                <option >CSE</option>
+                <option >IT</option>
+                <option >MBA</option>
+                <option >ADS</option>
+                <option >IOT</option>
+                <option >CYS</option>
+                <option >AML</option>                
+                <option >common</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="time_from">Time Schedule From</label>
+            <input type="time" id="time_from" name="time_from" required>
+            <label for="time_to">To</label>
+            <input type="time" id="time_to" name="time_to" required>
+            <label for="duration">Duration (hours)</label>
+            <input type="text" id="duration" name="duration" readonly>
+        </div>
+        
+        <script>
+            document.getElementById('time_from').addEventListener('input', calculateDuration);
+            document.getElementById('time_to').addEventListener('input', calculateDuration);
+        
+            function calculateDuration() {
+                var startTime = document.getElementById('time_from').value;
+                var endTime = document.getElementById('time_to').value;
+        
+                if (startTime && endTime) {
+                    var start = startTime.split(':');
+                    var end = endTime.split(':');
+        
+                    var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+                    var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+        
+                    var diff = endDate.getTime() - startDate.getTime();
+                    var hours = Math.floor(diff / 1000 / 60 / 60);
+                    var minutes = Math.floor(diff / 1000 / 60) % 60;
+        
+                    // Format the duration
+                    var duration = hours + ' hours ';
+                    if (minutes > 0) {
+                        duration += minutes + ' minutes';
+                    }
+        
+                    document.getElementById('duration').value = duration;
+                }
+            }
+        </script>
+        
+        <div class="form-group">
+            <label for="activity_type">Type of Activity</label>
+            <select id="activity_type"   name="activity_type" required>
+                <option value="select" hidden>Select Activity Type</option>
+                <option >Guest Lecture</option>
+                <option >Seminar</option>
+                <option >Workshop</option>
+                <option >Conference</option>
+                <option >VAC</option>
+                <option >Industrial Visit</option>
+                <option >Online Talk</option>
+                <option >Alumni Talk</option>
+                <option >Sports</option>
+                <option >Culturals</option>
+                <option >Orientation Talk</option>
+                <option >Soft Skills</option>
+                <option >Competitve Exam</option>
+                <option >Career Counselling</option>
+                <option >Professional Development</option>
+                <option >Administrative Training</option>
+                <option >Extension and Outreach Event</option> 
+                </select>          
+        </div>
+        <div class="form-group">
+            <label for="event_name">Event Name</label>
+            <input type="text" id="event_name" name="event_name" required>
+        </div>
+        <div class="form-group">
+            <label for="Institute_name">Institute Name</label>
+            <input type="text" id="Institute_name" name="institute_name" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <textarea id="location" name="location" required></textarea> 
+        </div>
+        <div class="form-group">
+            <label for="budget-requested">Financial Support Requested (TA/DA,Registration Fee)</label>
+            <input type="text" id="budget-requested" name="budget_requested" required>
+        </div>
+        <div class="form-group">
+            <label for="attachment">Attachment(Quotation)</label>
+            <input type="file" id="attachment"  accept="application/pdf" name="attachment" >
+        </div>        
+        <div class="form-group">
+            <input type="hidden" name="status" value="Pending">
+
+        <center><input type="submit" value="Submit" name="submit"></center>
+    </form>
+</div>
+<script>
+    // Function to get URL parameters
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Retrieve the college name parameter value from the URL
+    var collegeName = getParameterByName('college');
+
+    // Set the value of the input box to the selected college name
+    if (collegeName) {
+        document.getElementById('selectedCollege').value = collegeName.toUpperCase();
+    }
+</script>
+
+
+</body>
+</html>
